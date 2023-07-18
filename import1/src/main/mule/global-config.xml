@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+	<global-property doc:name="Global Property" doc:id="d4d96538-8bf7-431e-89ec-ab6debc84c31" name="env" value="dev" doc:description="Environment Variable"/>
+	<configuration-properties doc:name="Configuration properties" doc:id="883b9e94-a4e0-4db1-b76f-3bab7e892672" file="${env}-config.yaml" doc:description="Evironment properties file"/>
+	<http:listener-config name="Sample_HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="893f3a0e-d5f4-4d49-a1cc-36132f0c2c52" basePath="/sample" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config> 
+		<http:listener-config name="Sample_HTTPS_Listener_config" doc:name="HTTP Listener config" doc:id="ab2416fd-57d8-429f-938b-eddacaa2bcf3" basePath="/sample" >
+		<http:listener-connection host="0.0.0.0" port="8082" protocol="HTTPS">
+			<tls:context name="apiTLSContext">
+				<tls:key-store type="pkcs12" path="${env}-template-cert.p12" alias="server" keyPassword="pearson123" password="pearson123" />
+			</tls:context>
+		</http:listener-connection>
+	</http:listener-config>
+</mule>

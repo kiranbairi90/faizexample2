@@ -1,0 +1,7 @@
+
+
+app:
+  name: "template-app"
+  version: "1.0.0"
+  interfaceId: "12345"
+  flowname: "sample-template-flow"
